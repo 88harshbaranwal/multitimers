@@ -1,86 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Timers</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script>
-        // a = new Date();
-        // let time = a.hh()  +  ':' + a.mm() + ':' + a.ss() + ':';
-        class Timer {
-    constructor() {
-        this.seconds = 0;
-        this.interval = null;
-        this.container = document.createElement("div");
-        this.container.className = "timer";
-        this.container.innerHTML = `
-            <span class="time">${this.formatTime()}</span>
-            <button class="start">Start</button>
-            <button class="stop">Stop</button>
-            <button class="reset">Reset</button>
-            <button class="delete">Delete</button>
-        `;
-        document.querySelector(".timer-container").appendChild(this.container);
-
-        // Attach event listeners for timer controls
-        this.container.querySelector(".start").addEventListener("click", this.start.bind(this));
-        this.container.querySelector(".stop").addEventListener("click", this.stop.bind(this));
-        this.container.querySelector(".reset").addEventListener("click", this.reset.bind(this));
-        this.container.querySelector(".delete").addEventListener("click", this.delete.bind(this));
-    }
-
-    start() {
-        if (!this.interval) {
-            this.interval = setInterval(() => {
-                this.seconds++;
-                this.container.querySelector(".time").textContent = this.formatTime();
-            }, 1000);
-        }
-    }
-
-    stop() {
-        clearInterval(this.interval);
-        this.interval = null;
-    }
-
-    reset() {
-        this.seconds = 0;
-        this.container.querySelector(".time").textContent = this.formatTime();
-    }
-
-    delete() {
-        clearInterval(this.interval);
-        this.container.remove();
-    }
-
-    formatTime() {
-        const minutes = Math.floor(this.seconds / 60);
-        const seconds = this.seconds % 60;
-        return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
-}
-
-// Initialize an array to store timers
-const timers = [];
-
-// Add a new timer when the "Add Timer" button is clicked
-document.getElementById("add-timer").addEventListener("click", () => {
-    const newTimer = new Timer();
-    timers.push(newTimer);
-});
-
-
-    </script>
 </head>
+
 <body>
-    <h1>Multiple Timers App</h1>
-    <div class="container my-4 d-flex">
-        <div class="jumbotron d-flex">
-            <p>Set Time:</p>
+    <div class="container">
+    <section class="container1">
+        <h1 class="heading1">Multiple Timers App</h1>
+        <div class="container2">
+            <div class="jumbotron">
+                <p class="set-time">Set Time : </p>
+                <div class="input-grp">
+                    <label for="hours"> hh :</label>
+                    <input type="number" id="hours" hidden>
+                    <label for="minutes"> mm :</label>
+                    <input type="number" id="minutes" hidden>
+                    <label for="seconds"> ss</label>
+                    <input type="number" id="seconds" hidden>
 
-            <a class="btn btn-primary btn-lg" href="#" role="button">set</a>
+                </div>
+                <button class="btn btn-primary btn-lg" id="btn">set</button>
+            </div>
         </div>
-      </div>
-    <button id="add-timer">Add Timer</button>
-
-    <script src="script.js"></script>
+        <div id="timersContainer"></div>
+        <button id="add-timer" class="centered">Add Timer</button>
+    </section>
+    </div>
+    <script src="./script.js"></script>
 </body>
+
 </html>
